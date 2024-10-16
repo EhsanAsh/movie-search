@@ -9,6 +9,12 @@ const fetchData = async (searchTerm) => {
 			s: searchTerm,
 		},
 	});
+
+	// if the fetchData can't find any result it will return an error property.
+	if (response.data.Error) {
+		return [];
+	}
+
 	return response.data.Search;
 };
 

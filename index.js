@@ -11,6 +11,7 @@ const fetchData = async (searchTerm) => {
 
 const input = document.querySelector('input');
 
+// Input Debounce: Waiting for some to pass after the last event to actually do sth.
 let timeoutId;
 const onInput = (event) => {
 	if (timeoutId) {
@@ -18,4 +19,6 @@ const onInput = (event) => {
 	}
 	timeoutId = setTimeout(() => fetchData(event.target.value), 2000);
 };
+// Input Debounce: Waiting for some to pass after the last event to actually do sth.
+
 input.addEventListener('input', onInput);

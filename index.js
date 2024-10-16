@@ -35,17 +35,37 @@ const resultsWrapper = document.querySelector('.results');
 
 const onInput = async (event) => {
 	const movies = await fetchData(event.target.value);
-	// console.log(movies);
+
+	if (!movies.length) {
+		dropdown.classList.remove('is-active');
+		return;
+		// return because we don't want to run the rest of the function.
+	}
+
+	resultsWrapper.innerHTML = '';
 	dropdown.classList.add('is-active');
+
 	for (let movie of movies) {
 		const option = document.createElement('a');
+
+		const imageSrc = movie.Poster === 'N/A' ? '' : movie.Poster;
+
 		option.classList.add('dropdown-item');
 		option.innerHTML = `
-		<img src='${movie.Poster}' />
+		<img src='${imageSrc}' />
 		${movie.Title}
 		`;
+
 		resultsWrapper.appendChild(option);
 	}
 };
 
 input.addEventListener('input', debounce(onInput, 800));
+
+// Close the dropdown when the user clicks outside of it.
+// we are adding an event listener to the document which is the whole page, to check for any clicks that is not on the root element that we have created.
+document.addEventListener('click', (event) => {
+	if (!root.contains(event.target)) {
+		dropdown.classList.remove('is-active');
+	}
+});

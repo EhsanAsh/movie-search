@@ -1,10 +1,14 @@
 import { debounce } from './debounce.js';
-import { fetchData } from './utils.js';
-import { onMovieSelect } from './utils.js';
 
-export const createAutocomplete = ({ root }) => {
+export const createAutocomplete = ({
+	root,
+	renderOption,
+	onOptionSelect,
+	inputValue,
+	fetchData,
+}) => {
 	root.innerHTML = `
-    <label><b>Search for a Movie</b></label>
+    <label><b>Search</b></label>
     <input class="input" />
     <div class="dropdown">
 	    <div class="dropdown-menu">
@@ -18,9 +22,9 @@ export const createAutocomplete = ({ root }) => {
 	const resultsWrapper = root.querySelector('.results');
 
 	const onInput = async (event) => {
-		const movies = await fetchData(event.target.value);
+		const items = await fetchData(event.target.value);
 
-		if (!movies.length) {
+		if (!items.length) {
 			dropdown.classList.remove('is-active');
 			return;
 			// return because we don't want to run the rest of the function.
@@ -29,21 +33,15 @@ export const createAutocomplete = ({ root }) => {
 		resultsWrapper.innerHTML = '';
 		dropdown.classList.add('is-active');
 
-		for (let movie of movies) {
+		for (let item of items) {
 			const option = document.createElement('a');
 
-			const imageSrc = movie.Poster === 'N/A' ? '' : movie.Poster;
-
 			option.classList.add('dropdown-item');
-			option.innerHTML = `
-		<img src='${imageSrc}' />
-		${movie.Title}
-		`;
-
+			option.innerHTML = renderOption(item);
 			option.addEventListener('click', () => {
 				dropdown.classList.remove('is-active');
-				input.value = movie.Title;
-				onMovieSelect(movie);
+				input.value = inputValue(item);
+				onOptionSelect(item);
 			});
 
 			resultsWrapper.appendChild(option);

@@ -17,23 +17,27 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.css"
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bungee+Spice&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Overlock:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css" />
     <title>Movie Search</title>
   </head>
   <body>
-    <section class="hero is-primary is-bold">
+    <section class="bungee-spice-regular hero is-bold">
       <div class="hero-body">
         <div class="container">
-          <h1 class="title">
-            Movie Fight
+          <h1>
+            Movie Fight&nbsp;
             <span class="icon">
-              <i class="fas fa-film"></i>
+              <!-- <i class="fas fa-film"></i> -->
+              <i class="fa-duotone fa-solid fa-camera-movie" style="--fa-primary-color: #eaa81a; --fa-secondary-color: #27dadd; --fa-secondary-opacity: 0.8;"></i>
             </span>
           </h1>
         </div>
       </div>
     </section>
-    <div class="container">
+    <div class="container overlock-regular">
       <div class="columns">
         <div class="column">
           <div id="left-autocomplete"></div>
@@ -46,12 +50,13 @@
         </div>
       </div>
 
-      <div class="column is-half notification is-primary tutorial">
+      <div class="column is-half notification tutorial">
         <h1 class="title">Search For a Movie on Both Sides</h1>
         <p class="subtitle">We will tell you which is best!</p>
       </div>
     </div>
     <!-- <script src="utils.js"></script> -->
+    <script src="https://kit.fontawesome.com/e8db583555.js" crossorigin="anonymous"></script>
     <script src="index.js" type="module"></script>
   </body>
 </html>
